@@ -1,9 +1,9 @@
-let pathName2= new URL(import.meta.url).pathname;
-let name2 = pathName2.split("/").pop().replace(".js","");
+let pathName= new URL(import.meta.url).pathname;
+let name = pathName.split("/").pop().replace(".js","");
 
 export default class mySection extends HTMLElement{
     static async components(){
-        return await(await fetch(pathName2.replace(".js", ".html"))).text();
+        return await(await fetch(pathName.replace(".js", ".html"))).text();
     }
     constructor(){
         super();
@@ -15,4 +15,4 @@ export default class mySection extends HTMLElement{
     }
 }
 // myTabla.myTabla();
-customElements.define(name2, mySection);
+customElements.define(name, mySection);
