@@ -1,9 +1,8 @@
-let pathName= new URL(import.meta.url).pathname;
-let name = pathName.split("/").pop().replace(".js","");
-
+import config from "./config.js";
 export default class myTabla extends HTMLElement{
+    static url= import.meta.url
     static async components(){
-        return await(await fetch(pathName.replace(".js", ".html"))).text();
+        return await(await fetch(config.uri(myTabla.url))).text();
     }
     constructor(){
         super();
@@ -11,8 +10,7 @@ export default class myTabla extends HTMLElement{
         Promise.resolve(myTabla.components()).then(html=>{
             this.shadowRoot.innerHTML= html;
         })
-        console.log("etiqueta renderizada y estilizada");
     }
 }
 // myTabla.myTabla();
-customElements.define(name, myTabla);
+customElements.define(config.name(myTabla.url), myTabla);
